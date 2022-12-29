@@ -1,11 +1,11 @@
 # banking account service
 
-# [ ****Problem****]()
+# ****Problem****
 
 design a service that support all the functionality mentioned in requirement [document](CodeTest_Java_Backend - Account
 API.pdf)
 
-# [ **Features**]()
+# **Features**
 
 **Create User Account**
 
@@ -97,7 +97,7 @@ curl --location --request GET 'http://localhost:8081/netBanking/1/showHistory
 ]
 `````
 
-# [Technical Features]()
+# Technical Features
 
 * Easily navigable service package structure.
 * Separation of concern using 3 layer architecture (Controller, Service, repository)
@@ -114,7 +114,7 @@ curl --location --request GET 'http://localhost:8081/netBanking/1/showHistory
   Responsibility Principle. 
 * Functional programming is used.
 
-# **[Further Improvements]()**
+# **Further Improvements**
 
 * Java Docs
 * logs can be added
@@ -125,7 +125,7 @@ curl --location --request GET 'http://localhost:8081/netBanking/1/showHistory
 * same User can have multiple type of accounts/ more than 1 account. (for simplicity 1 account per ssn added in assignment)
 * code can be done using spring reactive
 
-# [Technology Used]()
+# Technology Used
 
 * Spring Boot
 * Java 11 - streams
@@ -135,7 +135,7 @@ curl --location --request GET 'http://localhost:8081/netBanking/1/showHistory
 * Junit 5
 * RestAssured
 
-# [**Unit Testing**]()
+# **Unit Testing**
 
 As there is not much logic in the service. I have decided to only write some unit test for controller and service class and test coverage is not done,
 instead have added integration test (API testing) which can be found inside test package IT folder.
@@ -144,7 +144,7 @@ Command mvn clean install would have failed test because integration tests requi
 
 `mvn test`
 
-# [Running the application]()
+# Running the application
 
 Execute below command to start the application.
 
