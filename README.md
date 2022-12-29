@@ -12,7 +12,7 @@ API.pdf)
 One can create new Account for user using this Service. This is internal url and should be accessed only by Admin. This
 is put under /internal root so that different Authentication/Authorization can be applied to it.
 
-`curl --location --request POST 'http://localhost:8081/netBanking/internal/create' \
+```curl --location --request POST 'http://localhost:8081/netBanking/internal/create' \
 --header 'Content-Type: application/json' \
 --data-raw '{
 "name": "Test user" ,
@@ -26,7 +26,8 @@ is put under /internal root so that different Authentication/Authorization can b
 },
 "ssn":1234,
 "emailId": "testuser@gmail.com",
-"mobileNo": 991210312 }'`
+"mobileNo": 991210312 }'``
+```
 
 **Deposit to user Account**
 
@@ -53,7 +54,8 @@ exception
 
 User can query for available balance using account number
 
-```curl --location --request GET 'http://localhost:8081/netBanking/1/showBalance'
+```
+curl --location --request GET 'http://localhost:8081/netBanking/1/showBalance'
 
 **response**
 
@@ -67,7 +69,8 @@ User can query for available balance using account number
 
 User can query latest 10 transaction history (type of transaction , balance before and after)
 
-`````curl --location --request GET 'http://localhost:8081/netBanking/1/showHistory
+`````
+curl --location --request GET 'http://localhost:8081/netBanking/1/showHistory
 
 **response**
 
@@ -134,7 +137,7 @@ User can query latest 10 transaction history (type of transaction , balance befo
 
 # [**Unit Testing**]()
 
-As there is not much logic in the service. I have decided to only write some unit test for controller and service class and test coverage is not done.
+As there is not much logic in the service. I have decided to only write some unit test for controller and service class and test coverage is not done,
 instead have added integration test (API testing) which can be found inside test package IT folder.
 
 Command mvn clean install would have failed test because integration tests required running service instance. Thus first start the service and then run the tests using below

@@ -40,6 +40,7 @@ class HistorySearchTest {
 
     @Test
     void getHistoryOfTransactions() {
+
         var accountNumber = getCreateAccountResponse(getUserDetails(random.nextInt(upperbound))).response().as(Long.class);
 
         Stream.iterate(0, n -> n + 1)
@@ -50,10 +51,13 @@ class HistorySearchTest {
                 .limit(2)
                 .forEach(x -> getWithdrawalResponse(getAccountDetails(accountNumber, BigDecimal.valueOf(100))));
 
+
         var response = getTransactionHistoryResponse(String.valueOf(accountNumber));
+
         assertThat(response.statusCode()).isEqualTo(200);
         var res = response.body().as(new TypeRef<List<TransactionDetails>>() {
         });
+
         assertThat(res.size()).isEqualTo(7);
         assertThat(res.get(0).getTransactionType()).isEqualTo("withdrawal");
         assertThat(res.get(0).getBalance()).isEqualTo(BigDecimal.valueOf(300).setScale(2, RoundingMode.FLOOR));
