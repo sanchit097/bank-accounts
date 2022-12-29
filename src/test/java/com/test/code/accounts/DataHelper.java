@@ -11,10 +11,10 @@ import java.math.BigDecimal;
 
 public class DataHelper {
 
-    public static UserDetails getUserDetails() {
+    public static UserDetails getUserDetails(Integer ssn) {
 
         return UserDetails.builder()
-                .ssn(1231)
+                .ssn(ssn)
                 .name("testUser")
                 .emailId("testuser@gmail.com")
                 .mobileNo(1243131)

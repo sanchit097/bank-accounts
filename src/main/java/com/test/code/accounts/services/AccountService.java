@@ -2,6 +2,8 @@ package com.test.code.accounts.services;
 
 import com.test.code.accounts.domains.Account;
 import com.test.code.accounts.domains.Address;
+import com.test.code.accounts.exceptions.ErrorCode;
+import com.test.code.accounts.exceptions.ValidationException;
 import com.test.code.accounts.models.UserAddress;
 import com.test.code.accounts.models.UserDetails;
 import com.test.code.accounts.repositories.AccountRepository;
@@ -19,6 +21,11 @@ public class AccountService {
 
     public Long createAccount(UserDetails userDetails) {
 
+        accountRepository.findAccountBySsn(userDetails.getSsn())
+                .ifPresent(res -> {
+                    throw new ValidationException(ErrorCode.USER_ALREADY_EXIST);
+                });
+
         return accountRepository.save(Account.builder()
                 .address(setUserAddress(userDetails.getAddress()))
                 .ssn(userDetails.getSsn())
@@ -26,6 +33,7 @@ public class AccountService {
                 .username(userDetails.getName())
                 .balance(BigDecimal.ZERO)
                 .build()).getAccountId();
+
 
     }
 

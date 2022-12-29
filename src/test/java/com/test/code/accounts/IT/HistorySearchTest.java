@@ -24,7 +24,7 @@ class HistorySearchTest {
 
     @Test
     void getBalanceCheck() {
-        var accountNumber = getCreateAccountResponse(getUserDetails()).response().as(Long.class);
+        var accountNumber = getCreateAccountResponse(getUserDetails(1114)).response().as(Long.class);
 
         getDepositResponse(getAccountDetails(accountNumber, BigDecimal.valueOf(500)));
         var response = getBalanceCheckResponse(String.valueOf(accountNumber));
@@ -38,7 +38,7 @@ class HistorySearchTest {
 
     @Test
     void getHistoryOfTransactions() {
-        var accountNumber = getCreateAccountResponse(getUserDetails()).response().as(Long.class);
+        var accountNumber = getCreateAccountResponse(getUserDetails(1115)).response().as(Long.class);
 
         Stream.iterate(0, n -> n + 1)
                 .limit(5)
