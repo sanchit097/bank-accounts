@@ -9,6 +9,8 @@ import java.math.RoundingMode;
 
 import static com.test.code.accounts.DataHelper.getAccountDetails;
 import static com.test.code.accounts.DataHelper.getUserDetails;
+import static com.test.code.accounts.DataHelper.random;
+import static com.test.code.accounts.DataHelper.upperbound;
 import static com.test.code.accounts.HelperMethod.getCreateAccountResponse;
 import static com.test.code.accounts.HelperMethod.getDepositResponse;
 import static com.test.code.accounts.HelperMethod.getWithdrawalResponse;
@@ -20,7 +22,7 @@ class TransactionTest {
     @Test
     void amountDepositSuccessfully() {
 
-        var accountNumber = getCreateAccountResponse(getUserDetails(1116)).response().as(Long.class);
+        var accountNumber = getCreateAccountResponse(getUserDetails(random.nextInt(upperbound))).response().as(Long.class);
 
         var request = getAccountDetails(accountNumber, BigDecimal.valueOf(100));
 
@@ -49,7 +51,7 @@ class TransactionTest {
     @Test
     void amountWidthDrawSuccessfully() {
 
-        var accountNumber = getCreateAccountResponse(getUserDetails(1117)).response().as(Long.class);
+        var accountNumber = getCreateAccountResponse(getUserDetails(random.nextInt(upperbound))).response().as(Long.class);
         getDepositResponse(getAccountDetails(accountNumber, BigDecimal.valueOf(10000)));
 
         var request = getAccountDetails(accountNumber, BigDecimal.valueOf(100));
@@ -79,7 +81,7 @@ class TransactionTest {
     @Test
     void amountWithDrawMoreThanBalance() {
 
-        var accountNumber = getCreateAccountResponse(getUserDetails(1118)).response().as(Long.class);
+        var accountNumber = getCreateAccountResponse(getUserDetails(random.nextInt(upperbound))).response().as(Long.class);
 
         getDepositResponse(getAccountDetails(accountNumber, BigDecimal.valueOf(100)));
         var request = getAccountDetails(accountNumber, BigDecimal.valueOf(200));

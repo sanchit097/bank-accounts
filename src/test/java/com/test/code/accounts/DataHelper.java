@@ -8,8 +8,12 @@ import com.test.code.accounts.models.UserAddress;
 import com.test.code.accounts.models.UserDetails;
 
 import java.math.BigDecimal;
+import java.util.Random;
 
 public class DataHelper {
+
+    public static Random random = new Random();
+    public static int upperbound = 1000;
 
     public static UserDetails getUserDetails(Integer ssn) {
 

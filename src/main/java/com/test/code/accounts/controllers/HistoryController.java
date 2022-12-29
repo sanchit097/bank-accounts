@@ -23,7 +23,7 @@ public class HistoryController {
     private final TransactionService transactionService;
 
 
-    @GetMapping("{accountId}/showBalance/")
+    @GetMapping("{accountId}/showBalance")
     public TransactionDetails getBalance(@Valid @PathVariable("accountId") Long accountId) {
         return transactionService.getBalanceDetails(accountId);
     }

@@ -11,6 +11,8 @@ import java.util.stream.Stream;
 
 import static com.test.code.accounts.DataHelper.getAccountDetails;
 import static com.test.code.accounts.DataHelper.getUserDetails;
+import static com.test.code.accounts.DataHelper.random;
+import static com.test.code.accounts.DataHelper.upperbound;
 import static com.test.code.accounts.HelperMethod.getBalanceCheckResponse;
 import static com.test.code.accounts.HelperMethod.getCreateAccountResponse;
 import static com.test.code.accounts.HelperMethod.getDepositResponse;
@@ -24,7 +26,7 @@ class HistorySearchTest {
 
     @Test
     void getBalanceCheck() {
-        var accountNumber = getCreateAccountResponse(getUserDetails(1114)).response().as(Long.class);
+        var accountNumber = getCreateAccountResponse(getUserDetails(random.nextInt(upperbound))).response().as(Long.class);
 
         getDepositResponse(getAccountDetails(accountNumber, BigDecimal.valueOf(500)));
         var response = getBalanceCheckResponse(String.valueOf(accountNumber));
@@ -38,7 +40,7 @@ class HistorySearchTest {
 
     @Test
     void getHistoryOfTransactions() {
-        var accountNumber = getCreateAccountResponse(getUserDetails(1115)).response().as(Long.class);
+        var accountNumber = getCreateAccountResponse(getUserDetails(random.nextInt(upperbound))).response().as(Long.class);
 
         Stream.iterate(0, n -> n + 1)
                 .limit(5)
@@ -52,7 +54,7 @@ class HistorySearchTest {
         assertThat(response.statusCode()).isEqualTo(200);
         var res = response.body().as(new TypeRef<List<TransactionDetails>>() {
         });
-        assertThat(res.size()).isEqualTo(5);
+        assertThat(res.size()).isEqualTo(7);
         assertThat(res.get(0).getTransactionType()).isEqualTo("withdrawal");
         assertThat(res.get(0).getBalance()).isEqualTo(BigDecimal.valueOf(300).setScale(2, RoundingMode.FLOOR));
         assertThat(res.get(0).getBeforeBalance()).isEqualTo(BigDecimal.valueOf(400).setScale(2, RoundingMode.FLOOR));

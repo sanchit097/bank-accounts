@@ -9,24 +9,25 @@ import java.math.BigDecimal;
 import java.util.Random;
 
 import static com.test.code.accounts.DataHelper.getUserDetails;
+import static com.test.code.accounts.DataHelper.random;
+import static com.test.code.accounts.DataHelper.upperbound;
 import static com.test.code.accounts.HelperMethod.getCreateAccountResponse;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
 class CreateAccountTest {
 
-
     @Test
     void createAccountTest() {
 
-        ExtractableResponse<Response> response = getCreateAccountResponse(getUserDetails(1111));
+        ExtractableResponse<Response> response = getCreateAccountResponse(getUserDetails(random.nextInt(upperbound)));
         assertThat(response.statusCode()).isEqualTo(200);
         assertThat(new BigDecimal(response.response().getBody().print())).isGreaterThan(BigDecimal.valueOf(0));
     }
 
     @Test
     void cannotCreateAccountDueToBadRequest() {
-        var request = getUserDetails(1112);
+        var request = getUserDetails(random.nextInt(upperbound));
         request.setSsn(null);
         ExtractableResponse<Response> response = getCreateAccountResponse(request);
         assertThat(response.statusCode()).isEqualTo(400);
@@ -34,7 +35,7 @@ class CreateAccountTest {
 
     @Test
     void CreateAccountForExistingUser() {
-        int random = new Random().nextInt(100000)+10;
+        int random = new Random().nextInt(100000) + 10;
         ExtractableResponse<Response> response = getCreateAccountResponse(getUserDetails(random));
         assertThat(response.statusCode()).isEqualTo(200);
         assertThat(new BigDecimal(response.response().getBody().print())).isGreaterThan(BigDecimal.valueOf(0));

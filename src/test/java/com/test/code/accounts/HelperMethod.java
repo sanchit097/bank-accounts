@@ -10,6 +10,8 @@ import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import lombok.SneakyThrows;
 
+import java.util.Random;
+
 import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.with;
 
@@ -67,7 +69,7 @@ public class HelperMethod {
     public static ExtractableResponse<Response> getBalanceCheckResponse(String accountId) {
         RestAssured.reset();
         RestAssured.baseURI = "http://127.0.0.1:8081/netBanking";
-        var  response = get("{accountId}/showBalance/", accountId)
+        var  response = get("{accountId}/showBalance", accountId)
                 .then()
                 .extract();
         Thread.sleep(100);
@@ -78,7 +80,7 @@ public class HelperMethod {
     public static ExtractableResponse<Response> getTransactionHistoryResponse(String accountId) {
         RestAssured.reset();
         RestAssured.baseURI = "http://127.0.0.1:8081/netBanking";
-        var  response = get("{accountId}/showHistory/", accountId)
+        var  response = get("{accountId}/showHistory", accountId)
                 .then()
                 .extract();
         Thread.sleep(100);

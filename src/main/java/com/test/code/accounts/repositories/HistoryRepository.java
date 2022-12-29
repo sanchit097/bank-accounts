@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface HistoryRepository extends JpaRepository<History, Long> {
 
-    @Query(nativeQuery = true, value = "SELECT * FROM History s WHERE s.account_id = :accountId ORDER BY id DESC LIMIT 5")
+    @Query(nativeQuery = true, value = "SELECT * FROM History s WHERE s.account_id = :accountId ORDER BY id DESC LIMIT 10")
     List<History> findHistoryByAccountId(Long accountId);
 }
